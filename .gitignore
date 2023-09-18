@@ -1,0 +1,10 @@
+# !project_*.c
+*.cache/
+*.gen/
+*.hw/
+*.ip_user_files/
+*.ioplanning/
+*.runs/
+*.sim/
+!*.srcs/
+*.rar
