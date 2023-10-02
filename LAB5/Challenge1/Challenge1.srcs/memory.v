@@ -6,6 +6,7 @@
 // Purpose      : Computer Architecture
 // Developers   : Krerk Piromsopa, Ph. D.
 //              : Chulalongkorn University.
+
 module memory(data,address,wr, clock, sw, seg, an, dp);
 parameter DATA_WIDTH=32;
 parameter ADDR_WIDTH=16;
