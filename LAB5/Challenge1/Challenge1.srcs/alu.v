@@ -28,7 +28,6 @@ begin
 	3'b101: begin S = -A ; Cout=0; end	// COM
 	3'b110: begin S = ~A ; Cout=0; end	// NOT
 	3'b111: begin S = ~B ; Cout=0; end	// NOT
-	default: {Cout,S}=A+B+Cin;	
 	endcase
 end
 
