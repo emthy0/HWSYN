@@ -51,7 +51,7 @@ module main(
 
     // var wire reg //
     reg [15:0] rom [31:0];
-    initial $readmemb("rom_big.data", rom);
+    initial $readmemb("4bitCal.data", rom);
     always @(posedge segClk) begin
       {num3,num2,num1,num0} = {rom[sw[4:0]] };
     end
