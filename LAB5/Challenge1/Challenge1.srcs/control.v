@@ -31,7 +31,7 @@ output reg mem_wr;
 output reg [1:0] ext_ops;
 output reg [2:0] alu_ops;
 input [5:0] opcode;
-input [10:0] reserved;
+input [2:0] reserved;
 input z_flag;
 
 localparam ALU 	=	6'b000001;
@@ -133,7 +133,7 @@ begin
 		ORI : alu_ops=3'b010;
 		ORUI : alu_ops=3'b010;
 		BEQ : alu_ops=3'b001;
-		ALU : alu_ops=reserved[2:0];
+		ALU : alu_ops=reserved;
 		default : alu_ops=3'b000;
 	endcase
 end

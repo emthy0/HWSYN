@@ -104,7 +104,7 @@ control	CONTROLUNIT(
 	ext_ops,
 	alu_ops,
 	opcode,
-	reserved,
+	reserved[2:0],
 	z_new
 	);
 

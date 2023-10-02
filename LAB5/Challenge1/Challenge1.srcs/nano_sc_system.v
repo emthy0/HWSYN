@@ -10,6 +10,7 @@
 module nano_sc_system(
 	output [6:0] seg,
   output [3:0] an,
+  output dp,
   input clk,
   input [11:0] sw
 );
