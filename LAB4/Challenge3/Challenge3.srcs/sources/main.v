@@ -24,8 +24,9 @@ module main(
   output [6:0] seg,
   output [3:0] an,
   input clk,
-  input [15:0] sw
+  input [15:0] sw,
 //  input [15:12] sw
+  input btnD, btnL, btnR, btnU
   );
     // begin of   7-seg shit //
     reg [3:0] num3,num2,num1,num0;
@@ -50,10 +51,17 @@ module main(
     // end of     Clk thing //
 
     // var wire reg //
-    reg [15:0] rom [31:0];
-    initial $readmemb("rom_big.data", rom);
-    always @(posedge segClk) begin
-      {num3,num2,num1,num0} = {rom[sw[4:0]] };
+    reg [15:0] rom [1023:0];
+    reg [4:0] mode;
+    initial $readmemb("rom_calculator.data", rom);
+    always @(posedge segClk && (btnU || btnL || btnD || btnR)) begin
+        case({btnU, btnL, btnD, btnR})
+            4'b1000: mode = 0; // +
+            4'b0100: mode = 1; // -
+            4'b0010: mode = 2; // *
+            4'b0001: mode = 3; // / 
+        endcase
+        {num3,num2, num1, num0} = rom[{mode,sw[15:12],sw[3:0]}];
     end
 
 
