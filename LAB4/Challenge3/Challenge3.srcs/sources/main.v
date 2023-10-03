@@ -51,17 +51,10 @@ module main(
     // end of     Clk thing //
 
     // var wire reg //
-    reg [15:0] rom [1023:0];
-    reg [4:0] mode;
-    initial $readmemb("rom_calculator.data", rom);
-    always @(posedge segClk && (btnU || btnL || btnD || btnR)) begin
-        case({btnU, btnL, btnD, btnR})
-            4'b1000: mode = 0; // +
-            4'b0100: mode = 1; // -
-            4'b0010: mode = 2; // *
-            4'b0001: mode = 3; // / 
-        endcase
-        {num3,num2, num1, num0} = rom[{mode,sw[15:12],sw[3:0]}];
+    reg [15:0] rom [31:0];
+    initial $readmemb("4bitCal.data", rom);
+    always @(posedge segClk) begin
+      {num3,num2,num1,num0} = {rom[sw[4:0]] };
     end
 
 

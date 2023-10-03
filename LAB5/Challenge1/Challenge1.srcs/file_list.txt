@@ -1,0 +1,13 @@
+nano_sc_system.v
+nanocpu.v
+rom.v
+memory.v
+mux2_1.v
+alu.v
+control.v
+extender.v
+adder.v
+regfile.v
+7seg.v
+clkDiv.v
+tester.v
