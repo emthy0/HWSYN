@@ -24,6 +24,6 @@ reg		nreset = 1;
 
 nanocpu		CPU(p_address,p_data,d_address,d_data,mem_wr,clk,nreset);
 rom 		PROGMEM(p_data,p_address[17:2]);
-memory 	DATAMEM(d_data,d_address[15:0],mem_wr,clk,sw,seg,an,dp);
+my_memory 	DATAMEM(d_data,d_address[15:0],mem_wr,clk,sw,seg,an,dp);
 
 endmodule

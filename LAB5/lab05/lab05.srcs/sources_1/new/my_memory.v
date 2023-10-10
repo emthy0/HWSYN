@@ -1,13 +1,27 @@
 `timescale 1ns / 1ps
-//-------------------------------------------------------
-// File name    : memory.v
-// Title        : Memory
-// Library      : nanoLADA
-// Purpose      : Computer Architecture
-// Developers   : Krerk Piromsopa, Ph. D.
-//              : Chulalongkorn University.
+//////////////////////////////////////////////////////////////////////////////////
+// Company: 
+// Engineer: 
+// 
+// Create Date: 10/03/2023 01:55:51 AM
+// Design Name: 
+// Module Name: my_memory
+// Project Name: 
+// Target Devices: 
+// Tool Versions: 
+// Description: 
+// 
+// Dependencies: 
+// 
+// Revision:
+// Revision 0.01 - File Created
+// Additional Comments:
+// 
+//////////////////////////////////////////////////////////////////////////////////
 
-module memory(data,address,wr, clock, sw, seg, an, dp);
+
+module my_memory(data, address, wr, clk, sw, seg, an, dp);
+
     parameter DATA_WIDTH = 32;
     parameter ADDR_WIDTH = 16;
     
@@ -23,25 +37,30 @@ module memory(data,address,wr, clock, sw, seg, an, dp);
     reg	[DATA_WIDTH-1:0]  data_out;
     // Tri-State buffer
     assign data=(wr==0) ? data_out : 32'bz;
-
-wire targetClk;
-wire [18:0] tclk;
-
-assign tclk[0]=clock;
-
-genvar c;
-generate for(c=0;c<18;c=c+1) begin
-		clockDiv fDiv(tclk[c+1],tclk[c]);
-end endgenerate
-clockDiv fdivTarget(targetClk,tclk[18]);
-
-reg [3:0] num3,num2,num1,num0; // left to right
-wire an0,an1,an2,an3;
-assign an={an3,an2,an1,an0};
-heptaSeg heptaSeg(seg,dp,an0,an1,an2,an3,num0,num1,num2,num3,targetClk);
-
-
-////////////////////////////////////////
+    
+    
+    ////////////////////////////////////////
+    // Clock
+    wire targetClk;
+    wire [18:0] tclk;
+    
+    assign tclk[0]=clk;
+    
+    genvar c;
+    generate for(c=0;c<18;c=c+1) begin
+        clockDiv fDiv(tclk[c], tclk[c+1]);
+    end endgenerate
+    
+    clockDiv fdivTarget(tclk[18], targetClk);
+    
+    
+    ////////////////////////////////////////
+    // Display
+    reg [3:0] num3,num2,num1,num0; // left to right
+    fourSevenSeg display(targetClk, num0, num1, num2, num3, seg, an, dp);
+    
+    
+    ////////////////////////////////////////
     // init mem
     initial $readmemb("data.list",mem);
     
